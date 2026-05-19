@@ -5,15 +5,38 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa6";
+import { signIn } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
+        try {
+            const { data: signInData, error } = await signIn.email({
+                email: data.email,
+                password: data.password,
+            });
 
+            if (error) {
+                toast.error(error.message || "Failed to login");
+            }
+            else {
+                toast.success("Login successful!");
+                router.push("/");
+                router.refresh();
+            }
+        }
+        catch (err) {
+            toast.error("An unexpected error occurred.");
+            console.log(err);
+        }
+        finally {
+            setIsLoading(false);
+        }
     };
 
     const handleGoogleSignIn = async () => {

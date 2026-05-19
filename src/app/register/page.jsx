@@ -4,15 +4,40 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
+import { signUp } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
-
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
 
+        try {
+            const { data: signUpData, error } = await signUp.email({
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                image: data.photoUrl,
+            });
+
+            if (error) {
+                toast.error(error.message || "Failed to register");
+            }
+            else {
+                toast.success("Registration successful!");
+                router.push("/");
+            }
+        }
+        catch (err) {
+            toast.error("An unexpected error occurred.");
+        }
+        finally {
+            setIsLoading(false);
+        }
     };
 
     const handleGoogleSignUp = async () => {
