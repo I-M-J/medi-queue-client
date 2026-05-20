@@ -62,7 +62,7 @@ export default function Navbar() {
                                         </button>
 
                                         <div className="absolute -right-2 top-full pt-2 px-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
-                                            <div className="text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 min-w-[12rem]">
+                                            <div className="text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 min-w-48">
                                                 <div className="px-4 py-3">
                                                     <span className="block text-sm text-gray-900 dark:text-white">
                                                         {session.user.name}
