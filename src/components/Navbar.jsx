@@ -58,6 +58,7 @@ export default function Navbar() {
                                                 className="w-8 h-8 rounded-full"
                                                 src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`}
                                                 alt="user photo"
+                                                referrerPolicy="no-referrer"
                                             />
                                         </button>
 

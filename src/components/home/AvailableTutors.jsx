@@ -33,6 +33,7 @@ export default function AvailableTutors({ tutors }) {
                                     className="w-24 h-24 mb-3 rounded-full shadow-lg object-cover"
                                     src={tutor.image || `https://ui-avatars.com/api/?name=${tutor.tutorName}`}
                                     alt={tutor.tutorName}
+                                    referrerPolicy="no-referrer"
                                 />
 
                                 <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-1">

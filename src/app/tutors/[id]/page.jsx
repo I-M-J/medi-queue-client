@@ -46,6 +46,7 @@ export default async function TutorDetailsPage({ params }) {
                                     src={tutor.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(tutor.name || tutor.tutorName || "Tutor")}&size=200`}
                                     alt={tutor.name || tutor.tutorName}
                                     className="w-32 h-32 md:w-48 md:h-48 rounded-lg object-cover shadow-sm border border-gray-100 dark:border-gray-700"
+                                    referrerPolicy="no-referrer"
                                 />
 
                                 <div className="flex-1">

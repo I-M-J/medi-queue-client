@@ -12,6 +12,7 @@ export default function TutorCard({ tutor }) {
                 className="object-cover w-full h-48"
                 src={tutor.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(tutor.name || tutor.tutorName || "Tutor")}`}
                 alt={tutor.name || tutor.tutorName || "Tutor"}
+                referrerPolicy="no-referrer"
             />
 
             <div className="p-5 flex flex-col grow">

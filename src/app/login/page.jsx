@@ -40,7 +40,15 @@ export default function LoginPage() {
     };
 
     const handleGoogleSignIn = async () => {
-
+        try {
+            await signIn.social({
+                provider: "google",
+                callbackURL: "/",
+            });
+        }
+        catch (err) {
+            toast.error("Failed to initiate Google sign in.");
+        }
     };
 
     return (
