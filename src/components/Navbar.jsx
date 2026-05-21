@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { useSession, signOut } from "@/lib/auth-client";
 
 export default function Navbar() {
+    "use no memo";
     const { data: session, isPending } = useSession();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,6 +21,9 @@ export default function Navbar() {
     const currentTheme = theme === "system" ? systemTheme : theme;
     const isDarkMode = currentTheme === "dark";
     const toggleMode = () => setTheme(isDarkMode ? "light" : "dark");
+
+    const hasSessionCookie = typeof window !== "undefined" && document.cookie.includes("better-auth.session_token");
+    const showPending = isPending && (!mounted || hasSessionCookie);
 
     return (
         <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow">
@@ -42,7 +46,7 @@ export default function Navbar() {
 
 
                     {
-                        isPending
+                        showPending
                             ? (
                                 <div className="w-8 h-8 rounded-full animate-pulse bg-gray-200 dark:bg-gray-700" />
                             )
