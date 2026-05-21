@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 
 export default function RegisterPage() {
