@@ -10,6 +10,7 @@ export default function Navbar() {
     "use no memo";
     const { data: session, isPending } = useSession();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme, systemTheme } = useTheme();
@@ -17,6 +18,7 @@ export default function Navbar() {
     useEffect(() => {
         setMounted(true);
     }, []);
+
 
     const currentTheme = theme === "system" ? systemTheme : theme;
     const isDarkMode = currentTheme === "dark";
@@ -52,11 +54,19 @@ export default function Navbar() {
                             )
                             : session
                                 ? (
-                                    <div className="relative group">
+                                    <div
+                                        className="relative profile-dropdown-container"
+                                        onBlur={(e) => {
+                                            if (!e.currentTarget.contains(e.relatedTarget)) {
+                                                setIsProfileOpen(false);
+                                            }
+                                        }}
+                                    >
                                         <button
                                             type="button"
+                                            onClick={() => setIsProfileOpen(!isProfileOpen)}
                                             className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                            aria-expanded="false"
+                                            aria-expanded={isProfileOpen}
                                         >
                                             <img
                                                 className="w-8 h-8 rounded-full"
@@ -66,7 +76,7 @@ export default function Navbar() {
                                             />
                                         </button>
 
-                                        <div className="absolute -right-2 top-full pt-2 px-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
+                                        <div className={`absolute -right-2 top-full pt-2 px-2 z-50 transition-all duration-300 ease-in-out ${isProfileOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
                                             <div className="text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 min-w-48">
                                                 <div className="px-4 py-3">
                                                     <span className="block text-sm text-gray-900 dark:text-white">
